@@ -1,5 +1,7 @@
 import { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { authActions } from '../store/AuthReducer';
 import './Signup.css';
 
 const Signup = () => {
@@ -7,11 +9,12 @@ const Signup = () => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  // const handleNav = () => {
-  //   navigate('/Login');
-  // }
+  const handleNav = () => {
+    navigate('/login');
+  }
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -33,7 +36,8 @@ const Signup = () => {
         }).then((res) => {
           if (res.ok) {
             res.json().then((data) => {
-              console.log(data, 'success');
+              dispatch(authActions.login(data));
+              navigate('/');
             })
           } else {
             res.json().then((data) => {
@@ -45,8 +49,6 @@ const Signup = () => {
         alert('Check if password is correct');
       }
     }
-
-
   }
 
   return (
@@ -60,7 +62,7 @@ const Signup = () => {
           <button className='SignupButton' type='submit'>Sign up</button>
         </form>
       </div>
-      <button className='LoginButton' /* onClick={handleNav} */>
+      <button className='LoginButton' onClick={handleNav}>
         Have an account? Login
       </button>
     </div>
