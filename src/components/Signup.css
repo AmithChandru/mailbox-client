@@ -1,0 +1,52 @@
+.SignupModal {
+  display: flex;
+  flex-direction: column;
+  height: 40vh;
+  width: 300px;
+  border: 1px solid gray;
+}
+
+.SignupForm {
+  display: flex;
+  margin: 20px;
+  flex-direction: column;
+}
+
+.SignupInput {
+  height: 30px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid gray;
+}
+
+.SignupButton {
+  background-color: deepskyblue;
+  border-radius: 20px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+.LoginButton {
+  width: 100%;
+  margin-top: 20px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.SigninInput {
+  height: 30px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid gray;
+  background-color: black;
+  color: white;
+}
+
+.ForgotPassword {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+  margin-top: 5px;
+}
