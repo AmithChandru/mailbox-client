@@ -14,12 +14,15 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(token);
     !token && navigate('/login');
   }, [])
 
   const handleChange = (value) => {
     setContent(value);
+  }
+
+  const handleInboxClick = () => {
+    navigate('/inbox');
   }
 
   const handleSendClick = async (e) => {
@@ -40,6 +43,10 @@ const Home = () => {
       if (res.ok) {
         res.json().then((data) => {
           console.log(data);
+          setEmail('');
+          setSubject('');
+          setContent('');
+          navigate('/inbox');
         })
       } else {
         res.json().then((data) => {
@@ -51,12 +58,13 @@ const Home = () => {
 
   return (
     <div className="HomeContainer">
+      <button className='ComposeButton' onClick={handleInboxClick}>Inbox</button>
       <form className='MailForm' onSubmit={handleSendClick}>
         <div className='InputEmail'>
           <label style={{marginRight: '10px'}}>To :</label>
-          <input type='email' style={{width: '100%'}} onChange={(e) => setEmail(e.target.value)} />
+          <input type='email' style={{width: '100%'}} onChange={(e) => setEmail(e.target.value)} value={email} />
         </div>
-        <input type='text' placeholder='Subject' style={{padding: '10px', margin: '10px 10px'}} onChange={(e) => setSubject(e.target.value)} />
+        <input type='text' placeholder='Subject' style={{padding: '10px', margin: '10px 10px'}} value={subject} onChange={(e) => setSubject(e.target.value)} />
         <ReactQuill theme='snow' value={content} onChange={handleChange} className='WrapperClass' />
         <button className='SendButton' type='submit'>Send</button>
       </form>

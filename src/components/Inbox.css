@@ -1,0 +1,8 @@
+.ComposeButton {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+}
