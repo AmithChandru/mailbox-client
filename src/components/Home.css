@@ -1,0 +1,50 @@
+.HomeContainer {
+  width: 700px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  position: fixed;
+  top: 10%;
+}
+
+.MailForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 300px;
+}
+
+.WrapperClass {
+  margin: 10px 10px;
+}
+
+.EditorClass {
+  background-color:lightgray;
+  padding: 1rem;
+  border: 1px solid #ccc;
+}
+
+.ToolbarClass {
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+}
+
+.InputEmail {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.SendButton {
+  width: 20%;
+  height: 40px;
+  border-radius: 10px;
+  align-self: flex-start;
+  margin-top: 40px;
+  margin-left: 10px;
+  border: none;
+  background-color: cornflowerblue;
+  cursor: pointer;
+}

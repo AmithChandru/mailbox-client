@@ -1,5 +1,7 @@
 import { useContext, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { authActions } from '../store/AuthReducer';
 import './Signup.css';
 
 const Login = () => {
@@ -10,6 +12,7 @@ const Login = () => {
   const [changeEmail, setChangeEmail] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleNavigate = () => {
     navigate('/signup');
@@ -31,6 +34,7 @@ const Login = () => {
     }).then((res) => {
       if (res.ok) {
         res.json().then((data) => {
+          dispatch(authActions.login(data));
           console.log(data);
           navigate('/');
         })
