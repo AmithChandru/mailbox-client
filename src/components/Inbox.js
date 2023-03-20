@@ -10,7 +10,8 @@ const Inbox = (props) => {
   const token = useSelector(state => state.auth.token);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const readEmails = useSelector(state => state.email.readEmail);
+  // const readEmails = useSelector(state => state.email.readEmail);
+  const [readEmails, setReadEmails] = useState([]);
 
   useEffect(() => {
     !token && navigate('/login');
@@ -25,6 +26,17 @@ const Inbox = (props) => {
   }
 
   const getEmails = async () => {
+    await fetch('https://react-movies-8029a-default-rtdb.asia-southeast1.firebasedatabase.app/email/readEmail.json')
+      .then((res) => {
+        res.json().then((data) => {
+          for (const key in data) {
+            setReadEmails((state) => [
+              ...state,
+              data[key].id
+            ])
+          }
+        })
+      })
     await fetch('https://react-movies-8029a-default-rtdb.asia-southeast1.firebasedatabase.app/email.json')
       .then((res) => {
         if (res.ok) {
@@ -49,8 +61,19 @@ const Inbox = (props) => {
       })
   }
 
-  const handleMailClick = (item) => {
+  const handleMailClick = async (item) => {
     dispatch(emailActions.readEmail(item));
+    await fetch('https://react-movies-8029a-default-rtdb.asia-southeast1.firebasedatabase.app/email/readEmail.json', {
+      method: 'POST',
+      body: JSON.stringify({
+        id: item
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((res) => {
+      console.log(res);
+    })
     navigate(`/${item}`);
   }
 

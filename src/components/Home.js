@@ -21,20 +21,26 @@ const Home = () => {
   }, [])
 
   const getTotalEmail = async () => {
+    let temp = [], count = 0;
+    await fetch('https://react-movies-8029a-default-rtdb.asia-southeast1.firebasedatabase.app/email/readEmail.json')
+      .then((res) => {
+        res.json().then((data) => {
+          for (const key in data) {
+            temp.push(data[key].id);
+          }
+        })
+      })
     await fetch('https://react-movies-8029a-default-rtdb.asia-southeast1.firebasedatabase.app/email.json')
       .then((res) => {
         res.json().then((data) => {
-          let temp = 0;
           for (const key in data) {
             if (data[key].receiverEmail === token.email) {
-              temp++;
+              if (temp.indexOf(key) < 0) {
+                count++;
+              }
             }
           }
-          if (temp === 0) {
-            setUnreadEmail(0);
-          } else {
-            setUnreadEmail(temp-readEmail.length);
-          }
+          setUnreadEmail(count);
         })
       })
   }
