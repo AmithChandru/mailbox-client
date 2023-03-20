@@ -26,7 +26,9 @@ const Home = () => {
         res.json().then((data) => {
           let temp = 0;
           for (const key in data) {
-            temp++;
+            if (data[key].receiverEmail === token.email) {
+              temp++;
+            }
           }
           if (temp === 0) {
             setUnreadEmail(0);
@@ -66,7 +68,6 @@ const Home = () => {
           setEmail('');
           setSubject('');
           setContent('');
-          navigate('/inbox');
         })
       } else {
         res.json().then((data) => {
@@ -76,9 +77,14 @@ const Home = () => {
     })
   }
 
+  const handleSentClick = () => {
+    navigate('/sent');
+  }
+
   return (
     <div className="HomeContainer">
       <button className='ComposeButton' onClick={handleInboxClick}>Inbox ({unreadEmail})</button>
+      <button className='SecondNavButton' onClick={handleSentClick}>Sent Email</button>
       <form className='MailForm' onSubmit={handleSendClick}>
         <div className='InputEmail'>
           <label style={{marginRight: '10px'}}>To :</label>

@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Home from './components/Home';
 import Inbox from './components/Inbox';
 import Email from './components/Email';
+import SentEmail from './components/SentEmail';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/inbox' element={<Inbox />} />
           <Route path='/:id' element={<Email />} />
+          <Route path='/sent' element={<SentEmail />} />
         </Routes>
       </BrowserRouter>
     </div>

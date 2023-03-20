@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import './Email.css';
 
@@ -10,6 +11,7 @@ const Email = () => {
   const [content, setContent] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
+  const token = useSelector(state => state.auth.token);
 
   useEffect(() => {
     let temp = location.pathname;
@@ -38,7 +40,12 @@ const Email = () => {
   }
 
   const handleBackClick = () => {
-    navigate('/inbox');
+    console.log(receiverEmail, token.email);
+    if (token.email != senderEmail) {
+      navigate('/inbox');
+    } else {
+      navigate('/sent');
+    }
   }
 
   return (

@@ -1,25 +1,18 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { emailActions } from "../store/EmailReducer";
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import './Inbox.css';
 
-const Inbox = (props) => {
+const SentEmail = () => {
 
   const [emails, setEmails] = useState(null);
   const token = useSelector(state => state.auth.token);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const readEmails = useSelector(state => state.email.readEmail);
 
   useEffect(() => {
     !token && navigate('/login');
     getEmails();
   }, [])
-
-  const handleComposeClick = () => {
-    navigate('/');
-  }
 
   const getEmails = async () => {
     await fetch('https://react-movies-8029a-default-rtdb.asia-southeast1.firebasedatabase.app/email.json')
@@ -28,7 +21,7 @@ const Inbox = (props) => {
           res.json().then((data) => {
             let temp = [];
             for (const key in data) {
-              if (data[key].receiverEmail === token.email) {
+              if (data[key].senderEmail === token.email) {
                 temp.push({
                   id: key,
                   receiverEmail: data[key].receiverEmail,
@@ -47,8 +40,11 @@ const Inbox = (props) => {
   }
 
   const handleMailClick = (item) => {
-    dispatch(emailActions.readEmail(item));
     navigate(`/${item}`);
+  }
+
+  const handleComposeClick = () => {
+    navigate('/');
   }
 
   const handleDelete = async (item) => {
@@ -71,7 +67,6 @@ const Inbox = (props) => {
         return (
           <div className="InboxCard">
             <section style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}} onClick={() => handleMailClick(item.id)}>
-              {!(readEmails.indexOf(item.id) >= 0) && <div className="BlueCircle" />}
               <span style={{fontWeight: '700'}}>{item.senderEmail}</span>
               <span style={{marginRight: '20px', margin: '10px 20px', fontWeight: '700'}}>{item.subject}</span>
               <span>{item.content}</span>
@@ -84,4 +79,4 @@ const Inbox = (props) => {
   )
 }
 
-export default Inbox;
+export default SentEmail;

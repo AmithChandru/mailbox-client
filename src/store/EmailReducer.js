@@ -8,7 +8,9 @@ const emailSlice = createSlice({
   },
   reducers: {
     readEmail(state, action) {
-      state.readEmail.push(action.payload);
+      if (state.readEmail.indexOf(action.payload) < 0) {
+        state.readEmail.push(action.payload);
+      }
     },
     setTotalEmail(state, action) {
       state.totalEmail = action.payload;
