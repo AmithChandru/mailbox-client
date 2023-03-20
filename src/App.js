@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
 import Home from './components/Home';
 import Inbox from './components/Inbox';
+import Email from './components/Email';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path='/signup' element={<Signup />} />
           <Route path='/' element={<Home />} />
           <Route path='/inbox' element={<Inbox />} />
+          <Route path='/:id' element={<Email />} />
         </Routes>
       </BrowserRouter>
     </div>

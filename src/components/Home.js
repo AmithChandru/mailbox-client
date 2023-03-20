@@ -12,10 +12,26 @@ const Home = () => {
   const [subject, setSubject] = useState('');
   const token = useSelector(state => state.auth.token);
   const navigate = useNavigate();
+  const readEmail = useSelector(state => state.email.readEmail);
+  const [unreadEmail, setUnreadEmail] = useState(0);
 
   useEffect(() => {
     !token && navigate('/login');
+    getTotalEmail();
   }, [])
+
+  const getTotalEmail = async () => {
+    await fetch('https://react-movies-8029a-default-rtdb.asia-southeast1.firebasedatabase.app/email.json')
+      .then((res) => {
+        res.json().then((data) => {
+          let temp = 0;
+          for (const key in data) {
+            temp++;
+          }
+          setUnreadEmail(temp-readEmail.length);
+        })
+      })
+  }
 
   const handleChange = (value) => {
     setContent(value);
@@ -58,7 +74,7 @@ const Home = () => {
 
   return (
     <div className="HomeContainer">
-      <button className='ComposeButton' onClick={handleInboxClick}>Inbox</button>
+      <button className='ComposeButton' onClick={handleInboxClick}>Inbox ({unreadEmail})</button>
       <form className='MailForm' onSubmit={handleSendClick}>
         <div className='InputEmail'>
           <label style={{marginRight: '10px'}}>To :</label>

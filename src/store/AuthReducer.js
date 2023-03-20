@@ -1,4 +1,5 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
+import emailSlice from "./EmailReducer";
 
 const authSlice = createSlice({
   name: 'auth',
@@ -19,7 +20,7 @@ const authSlice = createSlice({
 })
 
 const store = configureStore({
-  reducer: { auth: authSlice.reducer }
+  reducer: { auth: authSlice.reducer, email: emailSlice.reducer }
 })
 
 export const authActions = authSlice.actions;

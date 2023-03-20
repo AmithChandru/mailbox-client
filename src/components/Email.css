@@ -1,0 +1,12 @@
+.MailSection {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 10%;
+  left: 30%;
+  border: 1px solid black;
+  width: 400px;
+  height: 200px;
+  padding: 20px;
+  align-items: flex-start;
+}
