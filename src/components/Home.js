@@ -28,7 +28,11 @@ const Home = () => {
           for (const key in data) {
             temp++;
           }
-          setUnreadEmail(temp-readEmail.length);
+          if (temp === 0) {
+            setUnreadEmail(0);
+          } else {
+            setUnreadEmail(temp-readEmail.length);
+          }
         })
       })
   }

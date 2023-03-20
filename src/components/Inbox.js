@@ -49,19 +49,32 @@ const Inbox = (props) => {
     navigate(`/${item}`);
   }
 
+  const handleDelete = async (item) => {
+    await fetch(`https://react-movies-8029a-default-rtdb.asia-southeast1.firebasedatabase.app/email/${item}.json`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'Application/json'
+      }
+    }).then((res) => {
+      console.log(res);
+      getEmails();
+    })
+  }
+
   return (
     <div style={{width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '100px'}}>
       <button className="ComposeButton" onClick={handleComposeClick}>Compose</button>
       {!emails && <p>There are no emails</p>}
       {emails && emails.map((item) => {
         return (
-          <div className="InboxCard" onClick={() => handleMailClick(item.id)}>
-            <section style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+          <div className="InboxCard">
+            <section style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}} onClick={() => handleMailClick(item.id)}>
               {!(readEmails.indexOf(item.id) >= 0) && <div className="BlueCircle" />}
               <span style={{fontWeight: '700'}}>{item.senderEmail}</span>
+              <span style={{marginRight: '20px', margin: '10px 20px', fontWeight: '700'}}>{item.subject}</span>
+              <span>{item.content}</span>
             </section>
-            <span style={{marginRight: '20px', margin: '10px 20px', fontWeight: '700'}}>{item.subject}</span>
-            <span>{item.content}</span>
+            <button className="DeleteButton" onClick={() => handleDelete(item.id)}>Delete</button>
           </div>
         )
       })}
