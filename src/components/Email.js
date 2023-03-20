@@ -40,7 +40,6 @@ const Email = () => {
   }
 
   const handleBackClick = () => {
-    console.log(receiverEmail, token.email);
     if (token.email != senderEmail) {
       navigate('/inbox');
     } else {

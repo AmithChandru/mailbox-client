@@ -15,6 +15,9 @@ const Inbox = (props) => {
   useEffect(() => {
     !token && navigate('/login');
     getEmails();
+    setInterval(() => {
+      getEmails();
+    }, 2000)
   }, [])
 
   const handleComposeClick = () => {
