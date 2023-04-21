@@ -2,7 +2,7 @@
   "name": "mailbox-client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://AmithChandru.github.io/mailbox-client",
+  "homepage": "http://www.mailbox-client.com",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.16.5",
