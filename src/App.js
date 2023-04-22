@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Signup from './components/Signup';
-import { BrowserRouter, NavLink, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter, HashRouter, NavLink, Route, Routes, useNavigate } from 'react-router-dom';
 import Login from './components/Login';
 import Home from './components/Home';
 import Inbox from './components/Inbox';
@@ -21,7 +21,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <HashRouter>
         <NavLink to='/login'>
           {token && <button className='LogoutButton' onClick={handleLogout}>Logout</button>}
         </NavLink>
@@ -33,7 +33,7 @@ function App() {
           <Route path='/:id' element={<Email />} />
           <Route path='/sent' element={<SentEmail />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
